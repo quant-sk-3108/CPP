@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    const int LIMIT = 120000;   // Safe upper bound from PNT
+    vector<bool> isPrime(LIMIT + 1, true);
+
+    isPrime[0] = isPrime[1] = false;
+
+    for (int i = 2; i * i <= LIMIT; i++) {
+        if (isPrime[i]) {
+            for (int j = i * i; j <= LIMIT; j += i) {
+                isPrime[j] = false;
+            }
+        }
+    }
+
+    int count = 0;
+    for (int i = 2; i <= LIMIT; i++) {
+        if (isPrime[i]) {
+            count++;
+            if (count == 10001) {
+                cout << i << endl;
+                break;
+            }
+        }
+    }
+    return 0;
+}
