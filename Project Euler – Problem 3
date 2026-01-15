@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long n = 600851475143;
+    long long largestPrime = 0;
+
+    // Remove factor 2
+    while (n % 2 == 0) {
+        largestPrime = 2;
+        n /= 2;
+    }
+
+    // Check odd factors
+    for (long long i = 3; i * i <= n; i += 2) {
+        while (n % i == 0) {
+            largestPrime = i;
+            n /= i;
+        }
+    }
+
+    // If remaining n is prime
+    if (n > 1) {
+        largestPrime = n;
+    }
+
+    cout << largestPrime << endl;
+    return 0;
+}
